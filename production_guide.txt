@@ -1,0 +1,102 @@
+Production Elasticsearch Guide
+===============================
+
+This guide explains production-style Elasticsearch use cases and the core concepts behind them.
+
+1. What Elasticsearch is
+------------------------
+Elasticsearch is a distributed search and analytics engine. It stores data in JSON documents, indexes them for fast search, and supports full-text search, filtering, sorting, and aggregations.
+
+2. Core concepts
+----------------
+- Cluster: a group of Elasticsearch nodes that work together.
+- Node: one running Elasticsearch instance.
+- Index: a collection of documents, similar to a database table.
+- Document: a JSON record stored in an index.
+- Mapping: the structure and data types of fields.
+- Query DSL: Elasticsearch's JSON-based query language.
+
+3. Common query concepts used in production
+-------------------------------------------
+- match: full-text search over analyzed text fields.
+- term: exact match for keyword-like fields such as category or status.
+- range: filter values within a range such as price or date.
+- bool: combine multiple clauses such as must, filter, should, and must_not.
+- filter: used for exact or structured conditions without affecting relevance.
+- sort: order results by field.
+- highlight: show matching snippets in results.
+- aggregation: summarize data, such as counts by category or service.
+
+4. Use Case 1: E-commerce product search
+----------------------------------------
+Scenario:
+A shopping website needs to search products quickly and show relevant results.
+
+How Elasticsearch helps:
+- Full-text search finds matches in product titles and descriptions.
+- Filters narrow the results by category and price range.
+- Sorting orders products by price or rating.
+
+Example concepts used:
+- match for text search
+- term for category filtering
+- range for price filtering
+- sort for ranking results
+
+5. Use Case 2: Application log analysis
+---------------------------------------
+Scenario:
+A team wants to search application logs and find errors from the last 24 hours.
+
+How Elasticsearch helps:
+- Logs are indexed with timestamps and levels such as error or warning.
+- Date-range queries retrieve recent data quickly.
+- Aggregations count errors by service or host.
+
+Example concepts used:
+- range for time-based filtering
+- term for exact level filtering
+- aggs for summarizing results
+
+6. Use Case 3: Support ticket search
+-----------------------------------
+Scenario:
+A customer support team needs to find tickets related to refunds or payment issues.
+
+How Elasticsearch helps:
+- Tickets are searched across title and content.
+- Filters narrow results by status and priority.
+- Highlighting makes matching text easy to review.
+
+Example concepts used:
+- multi_match for searching multiple fields
+- bool with filter clauses
+- highlight for better usability
+
+7. Use Case 4: Knowledge-base article search
+-------------------------------------------
+Scenario:
+A help center wants to show the best article for a user question.
+
+How Elasticsearch helps:
+- Search ranks important keywords higher.
+- Boosting can prioritize title matches over body matches.
+- Filtering ensures only support articles are returned.
+
+Example concepts used:
+- match with boost
+- bool should clauses for relevance tuning
+- sort by rating or popularity
+
+8. Production tips
+------------------
+- Use proper mappings for fields such as dates, numbers, and keywords.
+- Keep text fields separate from exact-match fields.
+- Use filters for structured conditions to improve speed.
+- Refresh the index after bulk indexing before searching.
+- Use aggregations for dashboards and business reporting.
+- In real production systems, you may also use the official Elasticsearch Python client for cleaner code.
+
+9. Summary
+----------
+These examples show how Elasticsearch supports common real-world needs such as product search, monitoring, support operations, and knowledge retrieval. Once you understand query DSL and indexing basics, you can extend these patterns to larger systems.

@@ -1,0 +1,3 @@
+I want to learn about the basics of elasic search . So now plan a setup here and how we can use elastic search 
+
+
